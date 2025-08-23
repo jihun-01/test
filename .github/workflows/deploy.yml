@@ -5,12 +5,9 @@ on:
     branches: [ main ]
     paths:
       - 'helm-chart/front-chart/**'
+      - 'helm-chart/api-chart/**'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
-
-env:
-  HELM_CHART_NAME: front
-  HELM_CHART_VERSION: "0.1.0"
 
 jobs:
   build-and-push:
@@ -34,11 +31,15 @@ jobs:
       run: |
         cd helm-chart/front-chart
         helm package .
+        cd helm-chart/api-chart
+        helm package .
         echo "Helm chart packaged successfully"
         
     - name: Validate Helm chart
       run: |
         cd helm-chart/front-chart
+        helm lint .
+        cd helm-chart/api-chart
         helm lint .
         echo "Helm chart validation passed"
         
@@ -47,8 +48,6 @@ jobs:
         echo "Helm chart source code has been updated"
         echo "ArgoCD will automatically detect the change and deploy the new version"
         echo "No need to push chart package - ArgoCD reads from source directly"
-        echo "ArgoCD Server: ${{ env.ARGOCD_SERVER }}"
-        echo "ArgoCD Namespace: ${{ env.ARGOCD_NAMESPACE }}"
         
     - name: Notify deployment
       run: |

@@ -1,0 +1,29 @@
+replicaCount: 3
+
+# 이름 오버라이드 설정
+fullnameOverride: "api"
+
+image:
+  repository: gmltn328/scratcha_server:latest
+  tag: latest
+deployment:
+  maxUnavailable: 0
+  maxSurge: 1
+service:
+  type: ClusterIP
+  port: 80
+configMapName: api-config
+profile: "local"
+
+# HPA 설정
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 8
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+  #메모리 제한 설정
+  memoryLimit: "2Gi"
+  memoryRequest: "1Gi"
+  cpuLimit: "1000m"
+  cpuRequest: "500m"
