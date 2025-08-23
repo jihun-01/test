@@ -4,7 +4,7 @@ replicaCount: 3
 fullnameOverride: "front"
 
 image:
-  repository: kc-sfacspace.kr-central-2.kcr.dev/team2-repo/scratcha-frontend-test
+  repository: kc-sfacspace.kr-central-2.kcr.dev/team2-repo/scratcha-frontend-dev
   tag: "20250823160531"
 deployment:
   maxUnavailable: 0
