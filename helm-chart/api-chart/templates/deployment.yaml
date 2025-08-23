@@ -46,12 +46,6 @@ spec:
             name: mysql-url-secret
         ports:
         - containerPort: 8001
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8001
-          initialDelaySeconds: 5
-          periodSeconds: 5
         {{- if .Values.autoscaling.enabled }}
         resources:
           requests:
