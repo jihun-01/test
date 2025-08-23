@@ -12,6 +12,7 @@ deployment:
 service:
   type: ClusterIP
   port: 80
+  targetPort: 8001
 configMapName: app-config
 profile: "local"
 
