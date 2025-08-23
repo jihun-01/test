@@ -48,20 +48,10 @@ spec:
         - containerPort: 8001
         livenessProbe:
           httpGet:
-            path: /api/health
-            port: 8001
-          initialDelaySeconds: 60
-          periodSeconds: 30
-          timeoutSeconds: 5
-          failureThreshold: 3
-        readinessProbe:
-          httpGet:
-            path: /api/health
-            port: 8001
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 3
+            path: /health
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
         {{- if .Values.autoscaling.enabled }}
         resources:
           requests:
