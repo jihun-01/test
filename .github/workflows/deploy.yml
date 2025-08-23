@@ -1,0 +1,55 @@
+name: Deploy to ArgoCD
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'helm-chart/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+env:
+  HELM_CHART_NAME: test-app
+  HELM_CHART_VERSION: ${{ github.sha }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Helm
+      uses: azure/setup-helm@v3
+      with:
+        version: v3.12.0
+        
+    - name: Configure Git
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        
+    - name: Package Helm chart
+      run: |
+        cd helm-chart
+        helm package . --version ${{ env.HELM_CHART_VERSION }}
+        mv *.tgz ../
+        
+    - name: Push chart to Git repository
+      run: |
+        git add *.tgz
+        git commit -m "Update Helm chart to version ${{ env.HELM_CHART_VERSION }}"
+        git push origin main
+        
+    - name: Update ArgoCD Application
+      run: |
+        # ArgoCD 애플리케이션 매니페스트 업데이트
+        # 이 부분은 ArgoCD가 GitOps로 자동 감지하도록 설정되어 있어야 함
+        echo "Chart version ${{ env.HELM_CHART_VERSION }} has been pushed to Git repository"
+        echo "ArgoCD will automatically detect the change and deploy the new version"
+        
+    - name: Notify deployment
+      run: |
+        echo "Deployment triggered for chart version ${{ env.HELM_CHART_VERSION }}"
+        echo "Check ArgoCD dashboard for deployment status"
