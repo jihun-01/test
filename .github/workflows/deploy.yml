@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  HELM_CHART_NAME: front-chart
+  HELM_CHART_NAME: front
   HELM_CHART_VERSION: "0.1.0"
 
 jobs:
