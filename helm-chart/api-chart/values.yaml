@@ -4,7 +4,7 @@ replicaCount: 3
 fullnameOverride: "api"
 
 image:
-  repository: gmltn328/scratcha_server:latest
+  repository: gmltn328/scratcha_server
   tag: latest
 deployment:
   maxUnavailable: 0
