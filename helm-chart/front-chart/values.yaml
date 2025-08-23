@@ -1,0 +1,12 @@
+replicaCount: 3
+image:
+  repository: kc-sfacspace.kr-central-2.kcr.dev/team2-repo/scratcha-frontend
+  tag: latest
+deployment:
+  maxUnavailable: 0
+  maxSurge: 1
+service:
+  type: clusterIP
+  port: 80
+configMapName: front-config
+profile: "local"

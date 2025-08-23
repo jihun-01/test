@@ -47,6 +47,8 @@ jobs:
         echo "Helm chart source code has been updated"
         echo "ArgoCD will automatically detect the change and deploy the new version"
         echo "No need to push chart package - ArgoCD reads from source directly"
+        echo "ArgoCD Server: ${{ env.ARGOCD_SERVER }}"
+        echo "ArgoCD Namespace: ${{ env.ARGOCD_NAMESPACE }}"
         
     - name: Notify deployment
       run: |
