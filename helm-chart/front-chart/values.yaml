@@ -6,7 +6,7 @@ deployment:
   maxUnavailable: 0
   maxSurge: 1
 service:
-  type: clusterIP
+  type: ClusterIP
   port: 80
 configMapName: front-config
 profile: "local"
