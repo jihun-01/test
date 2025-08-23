@@ -1,5 +1,5 @@
-# Helm packages
-*.tgz
+# Helm packages (excluding chart packages for ArgoCD)
+# *.tgz
 
 # OS generated files
 .DS_Store
