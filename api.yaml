@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  namespace: team2-api
+  labels:
+    app: team2-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: team2-api
+  template:
+    metadata:
+      labels:
+        app: team2-api
+    spec:
+      nodeSelector:
+        kakaoi.io/kke-nodepool: team2-api
+      containers:
+      - name: team2-api
+        image: gmltn328/scratcha_server:latest
+        env:
+        - name: PROFILE
+          value: "local"
+        ports:
+        - containerPort: 8001
+        envFrom:
+        - configMapRef:
+            name: app-config
+        - secretRef:
+            name: mysql-primary-secret
+        - secretRef:
+            name: mysql-secondary-secret
+        - secretRef:
+            name: jwt-secret
+        - secretRef:
+            name: mysql-url-secret
+      imagePullSecrets:
+      - name: kc-cr-secret
