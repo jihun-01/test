@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'helm-chart/**'
+      - 'helm-chart/front-chart/**'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
@@ -32,13 +32,13 @@ jobs:
         
     - name: Package Helm chart
       run: |
-        cd helm-chart
+        cd helm-chart/front-chart
         helm package .
         echo "Helm chart packaged successfully"
         
     - name: Validate Helm chart
       run: |
-        cd helm-chart
+        cd helm-chart/front-chart
         helm lint .
         echo "Helm chart validation passed"
         
