@@ -15,14 +15,14 @@ service:
 configMapName: front-config
 profile: "local"
 
-# HPA 설정 (16GB 메모리 노드 최적화)
+# HPA 설정
 autoscaling:
   enabled: true
   minReplicas: 2
   maxReplicas: 8
   targetCPUUtilizationPercentage: 70
   targetMemoryUtilizationPercentage: 80
-  # 16GB 노드 기준으로 메모리 제한 설정
+  #메모리 제한 설정
   memoryLimit: "2Gi"
   memoryRequest: "1Gi"
   cpuLimit: "1000m"
