@@ -34,22 +34,22 @@ jobs:
       run: |
         cd helm-chart
         helm package .
-        mv *.tgz ../
+        echo "Helm chart packaged successfully"
         
-    - name: Push chart to Git repository
+    - name: Validate Helm chart
       run: |
-        git add *.tgz
-        git commit -m "Update Helm chart package"
-        git push origin main
+        cd helm-chart
+        helm lint .
+        echo "Helm chart validation passed"
         
-    - name: Update ArgoCD Application
+    - name: Notify ArgoCD deployment
       run: |
-        # ArgoCD 애플리케이션 매니페스트 업데이트
-        # 이 부분은 ArgoCD가 GitOps로 자동 감지하도록 설정되어 있어야 함
-        echo "Helm chart package has been pushed to Git repository"
+        echo "Helm chart source code has been updated"
         echo "ArgoCD will automatically detect the change and deploy the new version"
+        echo "No need to push chart package - ArgoCD reads from source directly"
         
     - name: Notify deployment
       run: |
-        echo "Deployment triggered for Helm chart package"
+        echo "Deployment triggered for Helm chart source code changes"
         echo "Check ArgoCD dashboard for deployment status"
+        echo "ArgoCD will automatically sync when it detects changes in the helm-chart directory"
