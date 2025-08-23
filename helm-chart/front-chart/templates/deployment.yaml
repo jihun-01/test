@@ -1,12 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
+  name: {{ include "front-chart.fullname" . }}-deployment
   namespace: ingress-nginx
   labels:
-    app: {{ .Release.Name }}
+    {{- include "front-chart.labels" . | nindent 4 }}
 spec:
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
+  {{- end }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -14,11 +16,11 @@ spec:
       maxSurge: {{ .Values.deployment.maxSurge }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      {{- include "front-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        {{- include "front-chart.selectorLabels" . | nindent 8 }}
       annotations:
         configmap-checksum: {{ include (print $.Template.BasePath "/front-config.yaml") . | sha256sum }}
     spec:
@@ -42,5 +44,14 @@ spec:
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 5
+        {{- if .Values.autoscaling.enabled }}
+        resources:
+          requests:
+            memory: {{ .Values.autoscaling.memoryRequest }}
+            cpu: {{ .Values.autoscaling.cpuRequest }}
+          limits:
+            memory: {{ .Values.autoscaling.memoryLimit }}
+            cpu: {{ .Values.autoscaling.cpuLimit }}
+        {{- end }}
       imagePullSecrets:
       - name: kc-cr-secret
