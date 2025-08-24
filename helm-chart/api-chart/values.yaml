@@ -5,7 +5,7 @@ fullnameOverride: "api"
 
 image:
   repository: gmltn328/scratcha_server
-  tag: latest
+  tag: "20250824054606-f1412e709bec19dc13d7ffaf901bb6e9aeb0d0f2"
 deployment:
   maxUnavailable: 0
   maxSurge: 1
