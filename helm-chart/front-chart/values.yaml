@@ -4,7 +4,7 @@ replicaCount: 3
 fullnameOverride: "front"
 
 image:
-  repository: scratcha-frontend
+  repository: kc-sfacspace.kr-central-2.kcr.dev/team2-repo/scratcha-frontend-dev
   tag: "20250823175031-8a821d60418c4ff01e8268f7aa1d6ce05b164ad1"
 deployment:
   maxUnavailable: 0
