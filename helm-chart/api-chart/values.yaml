@@ -2,7 +2,7 @@
 fullnameOverride: "api"
 
 image:
-  repository: kc-sfacspace.kr-central-2.kcr.dev/team2-repo/scratcha-backend
+  repository: {{ .Values.apiImageRepository | default "scratcha-backend" }}
   tag: "20250824054606-f1412e709bec19dc13d7ffaf901bb6e9aeb0d0f2"
 deployment:
   maxUnavailable: 0
