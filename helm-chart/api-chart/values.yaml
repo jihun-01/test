@@ -3,7 +3,7 @@ fullnameOverride: "api"
 
 image:
   repository: scratcha-backend
-  tag: "20250824054606-f1412e709bec19dc13d7ffaf901bb6e9aeb0d0f2"
+  tag: "20250824063902-7f841dfd9497ff990ddb12012d68e1273a44350c"
 deployment:
   maxUnavailable: 0
   maxSurge: 1
