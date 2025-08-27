@@ -26,7 +26,6 @@ spec:
     spec:
       nodeSelector:
         kakaoi.io/kke-nodepool: team2-ml-vision
-        accelerator: nvidia-tesla-t4
       containers:
       - name: {{ .Release.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
