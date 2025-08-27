@@ -40,6 +40,8 @@ spec:
             name: mysql-primary-secret
         - secretRef:
             name: mysql-url-secret
+        - secretRef:
+            name: s3-secret
         ports:
         - containerPort: 8080
         {{- if .Values.autoscaling.enabled }}
