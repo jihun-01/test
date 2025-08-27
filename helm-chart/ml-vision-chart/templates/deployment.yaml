@@ -51,11 +51,15 @@ spec:
           requests:
             memory: {{ .Values.autoscaling.memoryRequest }}
             cpu: {{ .Values.autoscaling.cpuRequest }}
+            {{- if gt (.Values.autoscaling.gpuRequest | int) 0 }}
             nvidia.com/gpu: {{ .Values.autoscaling.gpuRequest }}
+            {{- end }}
           limits:
             memory: {{ .Values.autoscaling.memoryLimit }}
             cpu: {{ .Values.autoscaling.cpuLimit }}
+            {{- if gt (.Values.autoscaling.gpuLimit | int) 0 }}
             nvidia.com/gpu: {{ .Values.autoscaling.gpuLimit }}
+            {{- end }}
         {{- end }}
       imagePullSecrets:
       - name: kc-cr-secret
