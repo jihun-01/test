@@ -27,5 +27,5 @@ autoscaling:
   cpuLimit: "2000m"
   cpuRequest: "1000m"
 
-  gpuLimit: 1
-  gpuRequest: 1
+  gpuLimit: 0.5
+  gpuRequest: 0.5
