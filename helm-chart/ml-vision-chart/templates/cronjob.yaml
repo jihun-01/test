@@ -26,6 +26,14 @@ spec:
             env:
             - name: PROFILE
               value: "{{ .Values.profile }}"
+            - name: CRONJOB_MODE
+              value: "true"
+            - name: HIGH_COUNT
+              value: "{{ .Values.cronjob.quizCount }}"
+            - name: MIDDLE_COUNT
+              value: "{{ .Values.cronjob.quizCount }}"
+            - name: LOW_COUNT
+              value: "{{ .Values.cronjob.quizCount }}"
             envFrom:
             - configMapRef:
                 name: {{ .Values.configMapName }}

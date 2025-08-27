@@ -38,3 +38,6 @@ cronjob:
   memoryLimit: "6Gi"
   cpuRequest: "1000m"
   cpuLimit: "2000m"
+  
+  # 퀴즈 생성 수량 설정 (모든 난이도 동일)
+  quizCount: 50      # 각 난이도별 퀴즈 생성 수
