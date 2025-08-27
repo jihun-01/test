@@ -37,13 +37,11 @@ spec:
         - configMapRef:
             name: {{ .Values.configMapName }}
         - secretRef:
-            name: mysql-primary-secret
-        - secretRef:
-            name: mysql-url-secret
-        - secretRef:
             name: s3-secret
         - secretRef:
             name: proxy-secret
+        - secretRef:
+            name: db-secret
         ports:
         - containerPort: 8080
         {{- if .Values.autoscaling.enabled }}
