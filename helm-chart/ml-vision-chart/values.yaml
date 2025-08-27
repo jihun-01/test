@@ -17,8 +17,8 @@ profile: "local"
 # HPA 설정
 autoscaling:
   enabled: false  # Deployment 비활성화
-  minReplicas: 1
-  maxReplicas: 2 
+  minReplicas: 0
+  maxReplicas: 0 
   targetCPUUtilizationPercentage: 60  
   targetMemoryUtilizationPercentage: 70
 
