@@ -1,0 +1,31 @@
+# 이름 오버라이드 설정
+fullnameOverride: "ml-vision"
+
+image:
+  repository: kc-sfacspace.kr-central-2.kcr.dev/team2-repo/scratcha-ml-vision
+  tag: latest
+deployment:
+  maxUnavailable: 0
+  maxSurge: 1
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+configMapName: ml-vision-config
+profile: "local"
+
+# HPA 설정
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 70
+
+  memoryLimit: "12Gi"
+  memoryRequest: "8Gi"
+  cpuLimit: "3000m"
+  cpuRequest: "2000m"
+
+  gpuLimit: 1
+  gpuRequest: 1
