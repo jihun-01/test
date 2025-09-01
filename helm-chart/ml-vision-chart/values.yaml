@@ -10,15 +10,15 @@ deployment:
 service:
   type: ClusterIP
   port: 80
-  targetPort: 8080
+  targetPort: 8000
 configMapName: ml-vision-config
 profile: "local"
 
-# HPA 설정
+# HPA 설정 (FastAPI 서버용)
 autoscaling:
-  enabled: false  # Deployment 비활성화
-  minReplicas: 0
-  maxReplicas: 0 
+  enabled: true   # FastAPI Deployment 활성화
+  minReplicas: 1
+  maxReplicas: 3 
   targetCPUUtilizationPercentage: 60  
   targetMemoryUtilizationPercentage: 70
 
@@ -30,14 +30,6 @@ autoscaling:
   gpuLimit: 1
   gpuRequest: 1
 
-# CronJob 설정
-cronjob:
-  enabled: true
-  schedule: "* 1 * * *"  # 매일 1시마다
-  memoryRequest: "3Gi"
-  memoryLimit: "6Gi"
-  cpuRequest: "1000m"
-  cpuLimit: "2000m"
-  
+
   # 퀴즈 생성 수량 설정 (모든 난이도 동일)
   quizCount: 50      # 각 난이도별 퀴즈 생성 수
